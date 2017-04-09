@@ -18,6 +18,9 @@ class UnionType(Type):
         self.class_type = None
 
     def add(self, type):
+        if type is None:
+            return self
+
         if isinstance(type, UnionType.PrimitiveType):
             for i, ptype in enumerate(self.primitive_types):
                 if ptype.is_mergeable(type):
@@ -45,11 +48,17 @@ class UnionType(Type):
                 self.class_type = self.class_type.merge(type)
             return self
 
-        raise Exception('Should not reach here')
+        assert isinstance(type, UnionType)
+        return self.merge(type)
 
     def merge(self, another):
         if isinstance(another, UnionType):
-            raise Exception('Not implemented')
+            self.add(another.none_type)
+            for ptype in another.primitive_types:
+                self.add(ptype)
+            self.add(another.list_type)
+            self.add(another.class_type)
+            return self
 
         # merge another type to union type is adding
         return self.add(another)

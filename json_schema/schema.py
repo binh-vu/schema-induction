@@ -32,14 +32,14 @@ def alter_type(instance, instance_type):
     # guess type of current instance, if it's different to the provided type
     # then the return type would be the union type
     InstanceType = guess_type(instance)
-    assert InstanceType in {ListType, ClassType}
 
     if InstanceType != instance_type.__class__:
-        new_type = UnionType().add(instance_type)
-        instance_type = InstanceType()
-        new_type.add(instance_type)
-    else:
-        new_type = instance_type
+        new_type = alter_type(instance, InstanceType())
+        if isinstance(instance_type, UnionType):
+            instance_type.add(new_type)
+            return instance_type
+
+        return UnionType().add(instance_type).add(new_type)
 
     if InstanceType == ClassType:
         # create type for each property in $instance, if property doesn't
@@ -66,7 +66,7 @@ def alter_type(instance, instance_type):
         for prop in instance_type:
             if prop not in instance:
                 instance_type.add_missing_prop(prop)
-    else:
+    elif InstanceType == ListType:
         # guess all possible value's type in list,
         # so it would be very slow if we have a long list
         instance_type.set_size(len(instance))
@@ -84,8 +84,15 @@ def alter_type(instance, instance_type):
                 prop_type = NoneType()
 
             instance_type.add(prop_type)
+    elif InstanceType == NoneType:
+        return instance_type
+    else:
+        assert InstanceType == PrimitiveType
+        instance_type = instance_type \
+            .set_type(type(instance).__name__) \
+            .add_value(instance)
 
-    return new_type
+    return instance_type
 
 
 def generate_schema(dict_objects):
@@ -97,7 +104,6 @@ def generate_schema(dict_objects):
     """
     schema = ClassType()
     for dict_object in dict_objects:
-        assert type(dict_object) is dict
         schema = alter_type(dict_object, schema)
 
     return schema

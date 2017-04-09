@@ -10,30 +10,6 @@ def setup():
     Type.MAX_N_KEEP_VALUE = 0
 
 
-@raises(AssertionError)
-def test_all_records_is_dict():
-    schema = generate_schema([
-        [],
-        {'contacts': {'name': 'Peter'}},
-    ])
-
-
-@raises(AssertionError)
-def test_all_records_is_dict_2():
-    schema = generate_schema([
-        'fdsfds',
-        {'contacts': {'name': 'Peter'}},
-    ])
-
-
-@raises(AssertionError)
-def test_all_records_is_dict_3():
-    schema = generate_schema([
-        5,
-        {'contacts': {'name': 'Peter'}},
-    ])
-
-
 def test_object():
     schema = generate_schema([{ 'name': 'Peter', 'age': 50 }])
     eq_(schema.to_string(indent=4), '''class(
@@ -108,6 +84,88 @@ def test_object_union_list_class_field_2():
             [name]: str
         ),
         list[2](str)
+    )
+)''')
+
+
+def test_list_and_object():
+    schema = generate_schema([
+        {'name': 'Peter', 'age': 50},
+        [
+            {'ref': 5}
+        ]
+    ])
+    eq_(schema.to_string(indent=4), '''union(
+    class(
+        age: int,
+        name: str
+    ),
+    list[1](
+        class(
+            ref: int
+        )
+    )
+)''')
+
+
+def test_list_and_object_2():
+    schema = generate_schema([
+        {'name': 'Peter', 'age': 50},
+        [
+            {'ref': 5}
+        ],
+        [
+            'address', 'phone', 'name'
+        ],
+        5,
+        {'contacts': ['John']}
+    ])
+    eq_(schema.to_string(indent=4), '''union(
+    int,
+    class(
+        [age]: int,
+        [name]: str,
+        [contacts]: list[1](str)
+    ),
+    list[1,3](
+        union(
+            str,
+            class(
+                ref: int
+            )
+        )
+    )
+)''')
+
+
+def test_list_and_object_3():
+    schema = generate_schema([
+        {'name': 'Peter', 'age': 50},
+        [
+            {'ref': 5}
+        ],
+        [
+            'address', 'phone', 'name'
+        ],
+        5,
+        {'contacts': ['John']},
+        None
+    ])
+    eq_(schema.to_string(indent=4), '''union(
+    null,
+    int,
+    class(
+        [age]: int,
+        [name]: str,
+        [contacts]: list[1](str)
+    ),
+    list[1,3](
+        union(
+            str,
+            class(
+                ref: int
+            )
+        )
     )
 )''')
 

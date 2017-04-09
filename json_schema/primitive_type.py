@@ -9,10 +9,17 @@ class PrimitiveType(Type):
     """
         Represent primitive type such as string, float, int
     """
-    def __init__(self, type):
+    def __init__(self, type=None):
+        if type is None:
+            self.type = None
+        else:
+            self.set_type(type)
+        self.possible_values = set()
+
+    def set_type(self, type):
         assert type in {'float', 'int', 'str', 'bool', 'unicode'}, type
         self.type = type
-        self.possible_values = set()
+        return self
 
     def add_value(self, value):
         if len(self.possible_values) > Type.MAX_N_KEEP_VALUE:
