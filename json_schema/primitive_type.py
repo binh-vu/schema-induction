@@ -17,6 +17,9 @@ class PrimitiveType(Type):
     """
         Represent primitive type such as string, float, int
     """
+
+    MAX_N_KEEP_VALUE = 7
+
     def __init__(self, type=None):
         if type is None:
             self.type = None
@@ -30,7 +33,7 @@ class PrimitiveType(Type):
         return self
 
     def add_value(self, value):
-        if len(self.possible_values) > Type.MAX_N_KEEP_VALUE:
+        if len(self.possible_values) > PrimitiveType.MAX_N_KEEP_VALUE:
             return self
 
         self.possible_values.add(value)
@@ -74,7 +77,7 @@ class PrimitiveType(Type):
         """
             @inherit
         """
-        if len(self.possible_values) < Type.MAX_N_KEEP_VALUE:
+        if len(self.possible_values) < PrimitiveType.MAX_N_KEEP_VALUE:
             return '%s{%s}' % (self.type, dump_csv(list(self.possible_values)))
         else:
             return self.type

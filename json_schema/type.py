@@ -4,8 +4,6 @@
 
 class Type(object):
 
-    MAX_N_KEEP_VALUE = 7
-
     def optimize(self):
         """
             Optimize the type

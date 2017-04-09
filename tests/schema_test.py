@@ -3,11 +3,13 @@
 
 from nose.tools import *
 from json_schema.schema import generate_schema
-from json_schema.type import Type
+from json_schema.primitive_type import PrimitiveType
+from json_schema.list_type import ListType
 
 
 def setup():
-    Type.MAX_N_KEEP_VALUE = 0
+    PrimitiveType.MAX_N_KEEP_VALUE = 0
+    ListType.MAX_N_KEEP_VALUE = 3
 
 
 def test_empty_object():
@@ -214,7 +216,7 @@ def test_object_list_field_2():
 
 
 def test_object_list_field_3():
-    Type.MAX_N_KEEP_VALUE = 4
+    PrimitiveType.MAX_N_KEEP_VALUE = 4
     schema = generate_schema([
         {'name': u'Peter', 'contacts': ['John']},
         {'contacts': ['Peter']},
@@ -225,7 +227,7 @@ def test_object_list_field_3():
     [name]: unicode{"Peter"},
     contacts: list[0,1](str{"Marry","John","Peter"})
 )''')
-    Type.MAX_N_KEEP_VALUE = 0
+    PrimitiveType.MAX_N_KEEP_VALUE = 0
 
 
 def test_object_list_field_4():

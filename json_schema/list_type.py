@@ -10,11 +10,15 @@ class ListType(Type):
         Represent the list type and its size if possible
         we interest in empty list, list have only 1 value or (1 or empty) value
     """
+
+    MAX_N_KEEP_VALUE = 7
+
     def __init__(self):
         self.record_type = None
         """
-            This set is used to keep maximum 3 values, which could be:
-            for any k, t, p >= 0:
+            This set is used to keep maximum n values, to report maximum n-1
+            possible size, e.g:
+            for any k, t, p >= 0 and n = 3:
                 + [k]: list have exactly k elements
                 + [k, t]: have either k or t elements
                 + [k, t, p]: we don't any information about size of list
@@ -40,7 +44,7 @@ class ListType(Type):
         :param size:
         :return:
         """
-        if len(self.possible_sizes) >= 3:
+        if len(self.possible_sizes) >= ListType.MAX_N_KEEP_VALUE:
             return self
 
         self.possible_sizes.add(size)
@@ -67,7 +71,7 @@ class ListType(Type):
 
             # merge set of possible sizes of 2 list comply to self.possible_sizes's definition
             for n in another.possible_sizes:
-                if len(self.possible_sizes) >= 3:
+                if len(self.possible_sizes) >= ListType.MAX_N_KEEP_VALUE:
                     break
                 self.possible_sizes.add(n)
 
@@ -79,7 +83,7 @@ class ListType(Type):
         prefix_space = ' ' * shift
         indent_space = ' ' * indent
 
-        if len(self.possible_sizes) >= 3:
+        if len(self.possible_sizes) >= ListType.MAX_N_KEEP_VALUE:
             size = ''
         else:
             size = '[%s]' % (','.join(str(x) for x in self.possible_sizes))
