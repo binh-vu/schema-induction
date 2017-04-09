@@ -10,11 +10,26 @@ def setup():
     Type.MAX_N_KEEP_VALUE = 0
 
 
+def test_empty_object():
+    schema = generate_schema([{}])
+    eq_(schema.to_string(indent=4), '''class()''')
+
+
 def test_object():
     schema = generate_schema([{ 'name': 'Peter', 'age': 50 }])
     eq_(schema.to_string(indent=4), '''class(
     age: int,
     name: str
+)''')
+
+
+def test_list():
+    schema = generate_schema([[{'name': 'Peter', 'age': 50}]])
+    eq_(schema.to_string(indent=4), '''list[1](
+    class(
+        age: int,
+        name: str
+    )
 )''')
 
 

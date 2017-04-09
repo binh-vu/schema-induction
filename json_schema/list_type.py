@@ -46,6 +46,13 @@ class ListType(Type):
         self.possible_sizes.add(size)
         return self
 
+    def optimize(self):
+        """
+            @inherit
+        """
+        self.record_type = self.record_type.optimize()
+        return self
+
     def merge(self, another):
         """
             @inherit

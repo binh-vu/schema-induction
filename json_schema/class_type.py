@@ -36,6 +36,14 @@ class ClassType(Type):
     def add_missing_prop(self, prop):
         self.missing_props.add(prop)
 
+    def optimize(self):
+        """
+            @inherit
+        """
+        for prop, prop_type in self.props.iteritems():
+            self.props[prop] = prop_type.optimize()
+        return self
+
     def merge(self, another):
         if isinstance(another, ClassType):
             for prop_name, prop_type in another.props.iteritems():
@@ -69,5 +77,9 @@ class ClassType(Type):
                 props.append('%s: %s' % (s, value.to_string(shift + indent, indent)))
 
         props = [prefix_space + indent_space + x for x in props]
+
+        if len(props) == 0:
+            return 'class()'
+
         text = ',\n'.join(props)
         return 'class(\n' + text + '\n' + prefix_space + ')'

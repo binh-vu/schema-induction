@@ -40,6 +40,12 @@ class PrimitiveType(Type):
 
         return self.type == another.type or {self.type, another.type} == {'float', 'int'}
 
+    def optimize(self):
+        """
+            @inherit
+        """
+        return self
+
     def merge(self, another):
         """
             @inherit
@@ -70,6 +76,12 @@ class NoneType(Type):
     """
         Represent null
     """
+
+    def optimize(self):
+        """
+            @inherit
+        """
+        return self
 
     def merge(self, another):
         """

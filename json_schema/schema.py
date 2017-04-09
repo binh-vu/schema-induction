@@ -95,15 +95,26 @@ def alter_type(instance, instance_type):
     return instance_type
 
 
-def generate_schema(dict_objects):
+def generate_schema(objects):
     """
         Generate schema from list of dict_objects
 
-        :param dict_objects: list<dict_object>
+        :param objects: list<dict_object>
         :return: Type
     """
-    schema = ClassType()
-    for dict_object in dict_objects:
-        schema = alter_type(dict_object, schema)
+    schema = None
+    for object in objects:
+        if schema is None:
+            schema = guess_type(object)()
+        schema = alter_type(object, schema)
 
+    if schema is not None:
+        return schema.optimize()
     return schema
+
+if __name__ == '__main__':
+    data = [
+        {}
+    ]
+
+    print generate_schema(data).to_string(indent=4)

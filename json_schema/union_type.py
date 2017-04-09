@@ -17,6 +17,32 @@ class UnionType(Type):
         self.list_type = None
         self.class_type = None
 
+    def optimize(self):
+        nhas_prim = len(self.primitive_types) == 0
+        nhas_none = self.none_type is None
+        nhas_list = self.list_type is None
+        nhas_clas = self.class_type is None
+
+        if not nhas_list:
+            self.list_type = self.list_type.optimize()
+
+        if not nhas_clas:
+            self.class_type = self.class_type.optimize()
+
+        if not nhas_none and nhas_prim and nhas_list and nhas_clas:
+            return self.none_type
+
+        if nhas_none and len(self.primitive_types) == 1 and nhas_list and nhas_clas:
+            return self.primitive_types[0]
+
+        if nhas_none and nhas_prim and not nhas_list and nhas_clas:
+            return self.list_type
+
+        if nhas_none and nhas_prim and nhas_list and not nhas_clas:
+            return self.class_type
+
+        return self
+
     def add(self, type):
         if type is None:
             return self

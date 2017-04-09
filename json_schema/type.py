@@ -6,6 +6,12 @@ class Type(object):
 
     MAX_N_KEEP_VALUE = 7
 
+    def optimize(self):
+        """
+            Optimize the type
+        """
+        raise Exception('Not implemented')
+
     def merge(self, another):
         """
             Merge 2 types together to a new type
