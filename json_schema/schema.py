@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from .class_type import ClassType
-from .list_type import ListType
-from .primitive_type import PrimitiveType, NoneType
-from .union_type import UnionType
+from json_schema.class_type import ClassType
+from json_schema.list_type import ListType
+from json_schema.primitive_type import PrimitiveType, NoneType
+from json_schema.union_type import UnionType
 
 # DO injection here
 UnionType.PrimitiveType = PrimitiveType
@@ -114,7 +114,6 @@ def generate_schema(objects):
 
 if __name__ == '__main__':
     data = [
-        {}
     ]
 
     print generate_schema(data).to_string(indent=4)

@@ -239,6 +239,16 @@ def test_object_list_field_4():
 )''')
 
 
+def test_object_empty_list():
+    schema = generate_schema([
+        {'name': u'Peter', 'contacts': []}
+    ])
+    eq_(schema.to_string(indent=4), '''class(
+    name: unicode,
+    contacts: list[0]()
+)''')
+
+
 def test_object_list_union_field():
     schema = generate_schema([
         {'name': u'Peter', 'contacts': ['John', 'Marry']},

@@ -50,7 +50,9 @@ class ListType(Type):
         """
             @inherit
         """
-        self.record_type = self.record_type.optimize()
+        if self.record_type is not None:
+            self.record_type = self.record_type.optimize()
+
         return self
 
     def merge(self, another):
@@ -82,7 +84,10 @@ class ListType(Type):
         else:
             size = '[%s]' % (','.join(str(x) for x in self.possible_sizes))
 
-        text = self.record_type.to_string(shift + indent, indent)
+        if self.record_type is None:
+            text = ''
+        else:
+            text = self.record_type.to_string(shift + indent, indent)
 
         # heuristic rules to determine if we could use shorthand
         # if the record type is simple type (primitive type, none type, or union type
