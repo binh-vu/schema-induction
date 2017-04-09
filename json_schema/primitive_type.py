@@ -1,8 +1,16 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import StringIO, csv
 from .type import Type
 from .union_type import UnionType
+
+
+def dump_csv(array, delimiter=','):
+    f = StringIO.StringIO()
+    writer = csv.writer(f, delimiter=delimiter, quoting=csv.QUOTE_ALL)
+    writer.writerow(array)
+    return f.getvalue()[:-2]
 
 
 class PrimitiveType(Type):
@@ -67,7 +75,7 @@ class PrimitiveType(Type):
             @inherit
         """
         if len(self.possible_values) < Type.MAX_N_KEEP_VALUE:
-            return '%s{%s}' % (self.type, ','.join((str(x) for x in self.possible_values)))
+            return '%s{%s}' % (self.type, dump_csv(list(self.possible_values)))
         else:
             return self.type
 

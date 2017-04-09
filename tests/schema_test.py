@@ -222,8 +222,8 @@ def test_object_list_field_3():
         {'contacts': []},
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode{Peter},
-    contacts: list[0,1](str{Marry,John,Peter})
+    [name]: unicode{"Peter"},
+    contacts: list[0,1](str{"Marry","John","Peter"})
 )''')
     Type.MAX_N_KEEP_VALUE = 0
 
