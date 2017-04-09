@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from nose.tools import *
-from schema.schema import generate_schema
-from schema.type import Type
+from json_schema.schema import generate_schema
+from json_schema.type import Type
 
 
 def setup():

@@ -24,17 +24,17 @@
             <entry file="file://$PROJECT_DIR$/tests/schema_test.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="512">
-                  <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+                  <caret line="32" column="40" lean-forward="false" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
                   <folding>
                     <element signature="e#43#67#0" expanded="true" />
-                    <marker date="1491714580000" expanded="true" signature="2607:2949" ph="..." />
+                    <marker date="1491716686000" expanded="true" signature="2617:2959" ph="..." />
                   </folding>
                 </state>
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/schema/__init__.py">
+          <file leaf-file-name="__init__.py" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/json_schema/__init__.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="0">
                   <caret line="0" column="35" lean-forward="true" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
@@ -43,8 +43,18 @@
               </provider>
             </entry>
           </file>
+          <file leaf-file-name="setup.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/setup.py">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="192">
+                  <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
+                  <folding />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="class_type.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/schema/class_type.py">
+            <entry file="file://$PROJECT_DIR$/json_schema/class_type.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="245">
                   <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
@@ -60,7 +70,7 @@
       <split-second>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
           <file leaf-file-name="type.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/schema/type.py">
+            <entry file="file://$PROJECT_DIR$/json_schema/type.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="128">
                   <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
@@ -70,7 +80,7 @@
             </entry>
           </file>
           <file leaf-file-name="schema.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/schema/schema.py">
+            <entry file="file://$PROJECT_DIR$/json_schema/schema.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="485">
                   <caret line="99" column="40" lean-forward="false" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
@@ -82,7 +92,7 @@
             </entry>
           </file>
           <file leaf-file-name="list_type.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/schema/list_type.py">
+            <entry file="file://$PROJECT_DIR$/json_schema/list_type.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="453">
                   <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
@@ -94,7 +104,7 @@
             </entry>
           </file>
           <file leaf-file-name="primitive_type.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/schema/primitive_type.py">
+            <entry file="file://$PROJECT_DIR$/json_schema/primitive_type.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="857">
                   <caret line="56" column="44" lean-forward="false" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
@@ -106,7 +116,7 @@
             </entry>
           </file>
           <file leaf-file-name="union_type.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/schema/union_type.py">
+            <entry file="file://$PROJECT_DIR$/json_schema/union_type.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state relative-caret-position="281">
                   <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
@@ -137,6 +147,7 @@
         <option value="$PROJECT_DIR$/schema/schema.py" />
         <option value="$PROJECT_DIR$/tests/schema_test.py" />
         <option value="$PROJECT_DIR$/schema/__init__.py" />
+        <option value="$PROJECT_DIR$/setup.py" />
       </list>
     </option>
   </component>
@@ -224,7 +235,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="schema" />
+              <option name="myItemId" value="json_schema" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -584,12 +595,12 @@
           <caret line="20" column="23" lean-forward="false" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
           <folding>
             <element signature="e#43#67#0" expanded="true" />
-            <marker date="1491714580000" expanded="true" signature="2607:2949" ph="..." />
+            <marker date="1491716686000" expanded="true" signature="2617:2959" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/class_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/class_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="480">
           <caret line="30" column="35" lean-forward="false" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
@@ -599,7 +610,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/primitive_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/primitive_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="208">
           <caret line="14" column="0" lean-forward="true" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
@@ -609,7 +620,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="192">
           <caret line="12" column="0" lean-forward="false" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
@@ -617,7 +628,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/list_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/list_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -627,7 +638,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/schema.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/schema.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -637,7 +648,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/union_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/union_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
@@ -651,12 +662,12 @@
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#43#67#0" expanded="true" />
-            <marker date="1491714580000" expanded="true" signature="2607:2949" ph="..." />
+            <marker date="1491716686000" expanded="true" signature="2617:2959" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/class_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/class_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="336">
           <caret line="21" column="26" lean-forward="true" selection-start-line="21" selection-start-column="26" selection-end-line="21" selection-end-column="26" />
@@ -690,7 +701,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/primitive_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/primitive_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="857">
           <caret line="56" column="44" lean-forward="false" selection-start-line="56" selection-start-column="44" selection-end-line="56" selection-end-column="44" />
@@ -700,7 +711,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/class_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/class_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="245">
           <caret line="23" column="0" lean-forward="false" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
@@ -710,7 +721,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/union_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/union_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="281">
           <caret line="19" column="0" lean-forward="false" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
@@ -718,7 +729,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/list_type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/list_type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="453">
           <caret line="48" column="0" lean-forward="false" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
@@ -728,7 +739,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/type.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/type.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="128">
           <caret line="8" column="0" lean-forward="false" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
@@ -736,7 +747,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/schema.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/schema.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="485">
           <caret line="99" column="40" lean-forward="false" selection-start-line="99" selection-start-column="40" selection-end-line="99" selection-end-column="40" />
@@ -749,10 +760,10 @@
     <entry file="file://$PROJECT_DIR$/tests/schema_test.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="512">
-          <caret line="32" column="40" lean-forward="true" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
+          <caret line="32" column="40" lean-forward="false" selection-start-line="32" selection-start-column="40" selection-end-line="32" selection-end-column="40" />
           <folding>
             <element signature="e#43#67#0" expanded="true" />
-            <marker date="1491714580000" expanded="true" signature="2607:2949" ph="..." />
+            <marker date="1491716686000" expanded="true" signature="2617:2959" ph="..." />
           </folding>
         </state>
       </provider>
@@ -765,10 +776,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/schema/__init__.py">
+    <entry file="file://$PROJECT_DIR$/json_schema/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="35" lean-forward="true" selection-start-line="0" selection-start-column="35" selection-end-line="0" selection-end-column="35" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="12" column="28" lean-forward="false" selection-start-line="12" selection-start-column="28" selection-end-line="12" selection-end-column="28" />
           <folding />
         </state>
       </provider>
