@@ -1,14 +1,15 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import StringIO, csv
+import StringIO
+import unicodecsv as csv
 from .type import Type
 from .union_type import UnionType
 
 
 def dump_csv(array, delimiter=','):
     f = StringIO.StringIO()
-    writer = csv.writer(f, delimiter=delimiter, quoting=csv.QUOTE_ALL)
+    writer = csv.writer(f, delimiter=delimiter, quoting=csv.QUOTE_ALL, encoding='utf-8')
     writer.writerow(array)
     return f.getvalue()[:-2]
 
