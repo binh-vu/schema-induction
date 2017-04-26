@@ -26,6 +26,6 @@ def test_to_string_ascii():
 
 def test_to_string_utf8():
     schema = generate_schema([{ 'name': u'Péter' }])
-    eq_(schema.to_string(indent=4), '''class(
+    eq_(schema.to_string(indent=4), u'''class(
     name: unicode{"Péter"}
 )''')

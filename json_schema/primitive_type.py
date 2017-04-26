@@ -79,7 +79,8 @@ class PrimitiveType(Type):
             @inherit
         """
         if len(self.possible_values) < PrimitiveType.MAX_N_KEEP_VALUE:
-            return '%s{%s}' % (self.type, dump_csv(list(self.possible_values)))
+            string = '%s{%s}' % (self.type, dump_csv(list(self.possible_values)))
+            return string.decode('utf-8')
         else:
             return self.type
 

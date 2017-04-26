@@ -218,14 +218,14 @@ def test_object_list_field_2():
 def test_object_list_field_3():
     PrimitiveType.MAX_N_KEEP_VALUE = 4
     schema = generate_schema([
-        {'name': u'Peter', 'contacts': ['John']},
-        {'contacts': ['Peter']},
+        {'name': u'Péter', 'contacts': ['John']},
+        {'contacts': [u'Péter']},
         {'contacts': ['Marry']},
         {'contacts': []},
     ])
-    eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode{"Peter"},
-    contacts: list[0,1](str{"Marry","John","Peter"})
+    eq_(schema.to_string(indent=4), u'''class(
+    [name]: unicode{"Péter"},
+    contacts: list[0,1](str{"Marry","John"}|unicode{"Péter"})
 )''')
     PrimitiveType.MAX_N_KEEP_VALUE = 0
 
@@ -253,7 +253,7 @@ def test_object_empty_list():
 
 def test_object_list_union_field():
     schema = generate_schema([
-        {'name': u'Peter', 'contacts': ['John', 'Marry']},
+        {'name': u'Péter', 'contacts': ['John', 'Marry']},
         {'contacts': [{'name': 'Peter'}]}
     ])
     eq_(schema.to_string(indent=4), '''class(
@@ -267,3 +267,29 @@ def test_object_list_union_field():
         )
     )
 )''')
+
+
+def test_utf8():
+    PrimitiveType.MAX_N_KEEP_VALUE = 7
+    schema = generate_schema([{
+        u'@id': u'http://en.wikipedia.org/wiki/L\u2019amour_de_loin',
+        u'@type': [u'http://xmlns.com/foaf/0.1/Document'],
+        u'http://purl.org/dc/elements/1.1/language': [{u'@value': u'en'}],
+        u'http://xmlns.com/foaf/0.1/primaryTopic': [{u'@id': u'http://dbpedia.org/resource/L\u2019amour_de_loin'}]
+    }])
+
+    eq_(schema.to_string(indent=4), u'''class(
+    http://xmlns.com/foaf/0.1/primaryTopic: list[1](
+        class(
+            @id: unicode{"http://dbpedia.org/resource/L\u2019amour_de_loin"}
+        )
+    ),
+    @id: unicode{"http://en.wikipedia.org/wiki/L\u2019amour_de_loin"},
+    @type: list[1](unicode{"http://xmlns.com/foaf/0.1/Document"}),
+    http://purl.org/dc/elements/1.1/language: list[1](
+        class(
+            @value: unicode{"en"}
+        )
+    )
+)''')
+    PrimitiveType.MAX_N_KEEP_VALUE = 0
