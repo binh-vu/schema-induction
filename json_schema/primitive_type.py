@@ -1,17 +1,19 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import StringIO
+import io
+
 import unicodecsv as csv
-from .type import Type
-from .union_type import UnionType
+
+from json_schema.type import Type
+from json_schema.union_type import UnionType
 
 
 def dump_csv(array, delimiter=','):
-    f = StringIO.StringIO()
-    writer = csv.writer(f, delimiter=delimiter, quoting=csv.QUOTE_ALL, encoding='utf-8')
+    f = io.BytesIO()
+    writer = csv.writer(f, delimiter=delimiter, quoting=csv.QUOTE_ALL)
     writer.writerow(array)
-    return f.getvalue()[:-2]
+    return f.getvalue()[:-2].decode('utf-8')
 
 
 class PrimitiveType(Type):
@@ -29,7 +31,7 @@ class PrimitiveType(Type):
         self.possible_values = set()
 
     def set_type(self, type):
-        assert type in {'float', 'int', 'str', 'bool', 'unicode'}, type
+        assert type in {'float', 'int', 'str', 'bool'}, type
         self.type = type
         return self
 
@@ -80,7 +82,7 @@ class PrimitiveType(Type):
         """
         if len(self.possible_values) < PrimitiveType.MAX_N_KEEP_VALUE:
             string = '%s{%s}' % (self.type, dump_csv(list(self.possible_values)))
-            return string.decode('utf-8')
+            return string
         else:
             return self.type
 

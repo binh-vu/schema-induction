@@ -31,7 +31,7 @@ class ClassType(Type):
         self.props[key] = value
 
     def __iter__(self):
-        return self.props.iterkeys()
+        return iter(self.props.keys())
 
     def add_missing_prop(self, prop):
         self.missing_props.add(prop)
@@ -40,13 +40,13 @@ class ClassType(Type):
         """
             @inherit
         """
-        for prop, prop_type in self.props.iteritems():
+        for prop, prop_type in self.props.items():
             self.props[prop] = prop_type.optimize()
         return self
 
     def merge(self, another):
         if isinstance(another, ClassType):
-            for prop_name, prop_type in another.props.iteritems():
+            for prop_name, prop_type in another.props.items():
                 if prop_name not in self.props:
                     self.props[prop_name] = prop_type
                     # prop_name is a missing prop because it's in another but not in self
@@ -56,7 +56,7 @@ class ClassType(Type):
 
             # for property appear in another but in self
             # assign missing property to this property
-            for prop_name in self.props.iterkeys():
+            for prop_name in self.props.keys():
                 if prop_name not in another:
                     self.missing_props.add(prop_name)
 
@@ -70,7 +70,7 @@ class ClassType(Type):
         indent_space = ' ' * indent
 
         props = []
-        for s, value in self.props.iteritems():
+        for s, value in self.props.items():
             if s in self.missing_props:
                 props.append('[%s]: %s' % (s, value.to_string(shift + indent, indent)))
             else:

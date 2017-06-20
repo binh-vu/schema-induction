@@ -5,7 +5,7 @@ from distutils.core import setup
 
 setup(
     name='json_schema',
-    version='1.1.4',
+    version='1.1.5',
     description='Generate schema from json objects',
     author='Binh Vu',
     author_email='binhlvu@gmail.com   ',

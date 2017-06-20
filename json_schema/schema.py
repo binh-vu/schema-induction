@@ -44,7 +44,7 @@ def alter_type(instance, instance_type):
     if InstanceType == ClassType:
         # create type for each property in $instance, if property doesn't
         # exist in $instance_type, add it to $instance_type, otherwise merge it
-        for prop, value in instance.iteritems():
+        for prop, value in instance.items():
             PropType = guess_type(value)
             if PropType == ClassType:
                 prop_type = alter_type(value, ClassType())
@@ -114,6 +114,7 @@ def generate_schema(objects):
 
 if __name__ == '__main__':
     data = [
+        {'haha': 1}
     ]
 
-    print generate_schema(data).to_string(indent=4)
+    print(generate_schema(data).to_string(indent=4))

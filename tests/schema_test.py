@@ -20,8 +20,8 @@ def test_empty_object():
 def test_object():
     schema = generate_schema([{ 'name': 'Peter', 'age': 50 }])
     eq_(schema.to_string(indent=4), '''class(
-    age: int,
-    name: str
+    name: str,
+    age: int
 )''')
 
 
@@ -29,8 +29,8 @@ def test_list():
     schema = generate_schema([[{'name': 'Peter', 'age': 50}]])
     eq_(schema.to_string(indent=4), '''list[1](
     class(
-        age: int,
-        name: str
+        name: str,
+        age: int
     )
 )''')
 
@@ -41,8 +41,8 @@ def test_object_missing_field():
         {'name': 'John'}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [age]: int,
-    name: str
+    name: str,
+    [age]: int
 )''')
 
 
@@ -53,8 +53,8 @@ def test_object_union_primitive_field_1():
         {'name': None}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [age]: int,
-    name: null|str
+    name: null|str,
+    [age]: int
 )''')
 
 
@@ -64,8 +64,8 @@ def test_object_union_primitive_field_2():
         {'name': 50, 'age': 5.0}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    age: float,
-    name: str|int
+    name: str|int,
+    age: float
 )''')
 
 
@@ -75,7 +75,7 @@ def test_object_union_list_class_field():
         {'contacts': {'name': 'Peter'}}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode,
+    [name]: str,
     contacts: union(
         class(
             name: str
@@ -93,12 +93,12 @@ def test_object_union_list_class_field_2():
         {'contacts': {'age': 50}},
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode,
+    [name]: str,
     contacts: union(
         int,
         class(
-            [age]: int,
-            [name]: str
+            [name]: str,
+            [age]: int
         ),
         list[2](str)
     )
@@ -114,8 +114,8 @@ def test_list_and_object():
     ])
     eq_(schema.to_string(indent=4), '''union(
     class(
-        age: int,
-        name: str
+        name: str,
+        age: int
     ),
     list[1](
         class(
@@ -140,8 +140,8 @@ def test_list_and_object_2():
     eq_(schema.to_string(indent=4), '''union(
     int,
     class(
-        [age]: int,
         [name]: str,
+        [age]: int,
         [contacts]: list[1](str)
     ),
     list[1,3](
@@ -172,8 +172,8 @@ def test_list_and_object_3():
     null,
     int,
     class(
-        [age]: int,
         [name]: str,
+        [age]: int,
         [contacts]: list[1](str)
     ),
     list[1,3](
@@ -195,7 +195,7 @@ def test_object_list_field_1():
         {'contacts': []}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode,
+    [name]: str,
     contacts: list(str)
 )''')
 
@@ -206,7 +206,7 @@ def test_object_list_field_2():
         {'contacts': [{'name': 'Peter'}]}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode,
+    [name]: str,
     contacts: list[1,2](
         class(
             name: str
@@ -224,8 +224,8 @@ def test_object_list_field_3():
         {'contacts': []},
     ])
     eq_(schema.to_string(indent=4), u'''class(
-    [name]: unicode{"Péter"},
-    contacts: list[0,1](str{"Marry","John"}|unicode{"Péter"})
+    [name]: str{"Péter"},
+    contacts: list[0,1](str{"Marry","John","Péter"})
 )''')
     PrimitiveType.MAX_N_KEEP_VALUE = 0
 
@@ -236,7 +236,7 @@ def test_object_list_field_4():
         {'contacts': ['Peter']}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode,
+    [name]: str,
     contacts: list[1](str)
 )''')
 
@@ -246,7 +246,7 @@ def test_object_empty_list():
         {'name': u'Peter', 'contacts': []}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    name: unicode,
+    name: str,
     contacts: list[0]()
 )''')
 
@@ -257,7 +257,7 @@ def test_object_list_union_field():
         {'contacts': [{'name': 'Peter'}]}
     ])
     eq_(schema.to_string(indent=4), '''class(
-    [name]: unicode,
+    [name]: str,
     contacts: list[1,2](
         union(
             str,
@@ -272,23 +272,23 @@ def test_object_list_union_field():
 def test_utf8():
     PrimitiveType.MAX_N_KEEP_VALUE = 7
     schema = generate_schema([{
-        u'@id': u'http://en.wikipedia.org/wiki/L\u2019amour_de_loin',
-        u'@type': [u'http://xmlns.com/foaf/0.1/Document'],
-        u'http://purl.org/dc/elements/1.1/language': [{u'@value': u'en'}],
-        u'http://xmlns.com/foaf/0.1/primaryTopic': [{u'@id': u'http://dbpedia.org/resource/L\u2019amour_de_loin'}]
+        '@id': u'http://en.wikipedia.org/wiki/L\u2019amour_de_loin',
+        '@type': [u'http://xmlns.com/foaf/0.1/Document'],
+        'http://purl.org/dc/elements/1.1/language': [{u'@value': u'en'}],
+        'http://xmlns.com/foaf/0.1/primaryTopic': [{u'@id': u'http://dbpedia.org/resource/L\u2019amour_de_loin'}]
     }])
 
     eq_(schema.to_string(indent=4), u'''class(
-    http://xmlns.com/foaf/0.1/primaryTopic: list[1](
-        class(
-            @id: unicode{"http://dbpedia.org/resource/L\u2019amour_de_loin"}
-        )
-    ),
-    @id: unicode{"http://en.wikipedia.org/wiki/L\u2019amour_de_loin"},
-    @type: list[1](unicode{"http://xmlns.com/foaf/0.1/Document"}),
+    @id: str{"http://en.wikipedia.org/wiki/L\u2019amour_de_loin"},
+    @type: list[1](str{"http://xmlns.com/foaf/0.1/Document"}),
     http://purl.org/dc/elements/1.1/language: list[1](
         class(
-            @value: unicode{"en"}
+            @value: str{"en"}
+        )
+    ),
+    http://xmlns.com/foaf/0.1/primaryTopic: list[1](
+        class(
+            @id: str{"http://dbpedia.org/resource/L\u2019amour_de_loin"}
         )
     )
 )''')
