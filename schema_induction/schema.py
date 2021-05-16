@@ -1,10 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from json_schema.class_type import ClassType
-from json_schema.list_type import ListType
-from json_schema.primitive_type import PrimitiveType, NoneType
-from json_schema.union_type import UnionType
+from schema_induction.class_type import ClassType
+from schema_induction.list_type import ListType
+from schema_induction.primitive_type import PrimitiveType, NoneType
+from schema_induction.union_type import UnionType
 
 # DO injection here
 UnionType.PrimitiveType = PrimitiveType
@@ -95,13 +95,15 @@ def alter_type(instance, instance_type):
     return instance_type
 
 
-def generate_schema(objects):
+def generate_schema(objects, max_n_examples: int=7):
     """
         Generate schema from list of dict_objects
 
         :param objects: list<dict_object>
         :return: Type
     """
+    PrimitiveType.MAX_N_KEEP_VALUE = max_n_examples
+
     schema = None
     for object in objects:
         if schema is None:
@@ -112,8 +114,10 @@ def generate_schema(objects):
         return schema.optimize()
     return schema
 
+
 if __name__ == '__main__':
     data = [
+        {'haha': 5},
         {'haha': 1}
     ]
 

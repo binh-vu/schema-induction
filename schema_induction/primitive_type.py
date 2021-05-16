@@ -5,8 +5,8 @@ import io
 
 import unicodecsv as csv
 
-from json_schema.type import Type
-from json_schema.union_type import UnionType
+from schema_induction.type import Type
+from schema_induction.union_type import UnionType
 
 
 def dump_csv(array, delimiter=','):
@@ -28,7 +28,8 @@ class PrimitiveType(Type):
             self.type = None
         else:
             self.set_type(type)
-        self.possible_values = set()
+        # implement using dictionary so we can keep the order
+        self.possible_values = {}
 
     def set_type(self, type):
         assert type in {'float', 'int', 'str', 'bool'}, type
@@ -39,7 +40,8 @@ class PrimitiveType(Type):
         if len(self.possible_values) > PrimitiveType.MAX_N_KEEP_VALUE:
             return self
 
-        self.possible_values.add(value)
+        if value not in self.possible_values:
+            self.possible_values[value] = 1
         return self
 
     def is_mergeable(self, another):
@@ -66,7 +68,7 @@ class PrimitiveType(Type):
         """
         if isinstance(another, PrimitiveType):
             if self.type == another.type:
-                for value in another.possible_values:
+                for value in another.possible_values.keys():
                     self.add_value(value)
                 return self
 
@@ -81,7 +83,7 @@ class PrimitiveType(Type):
             @inherit
         """
         if len(self.possible_values) < PrimitiveType.MAX_N_KEEP_VALUE:
-            string = '%s{%s}' % (self.type, dump_csv(list(self.possible_values)))
+            string = '%s{%s}' % (self.type, dump_csv(list(self.possible_values.keys())))
             return string
         else:
             return self.type
